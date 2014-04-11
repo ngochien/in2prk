@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory;
 public class JPAAnnotationsTest {
 
 	// Die folgenden drei Konstanten müssen jeweils angepasst werden:
-	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
-	private static final String DB_USER = "hr";
-	private static final String DB_PASSWORD = "3113";
+	private static final String DB_URL = "jdbc:oracle:thin:@//Oracle:1521/inf09";
+	private static final String DB_USER = "abl400";
+	private static final String DB_PASSWORD = "Nh31011991";
 	// Ende
 
 	private static final Logger LOG = LoggerFactory

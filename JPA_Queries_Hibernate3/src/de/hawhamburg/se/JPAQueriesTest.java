@@ -24,9 +24,9 @@ public class JPAQueriesTest {
 
 	private static final String STREET_1 = "Murmelgasse";
 	// Die folgenden drei Konstanten müssen jeweils angepasst werden:
-	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
-	private static final String DB_USER = "hr";
-	private static final String DB_PASSWORD = "3113";
+	private static final String DB_URL = "jdbc:oracle:thin:@//Oracle:1521/inf09";
+	private static final String DB_USER = "abl400";
+	private static final String DB_PASSWORD = "Nh31011991";
 	// Ende
 
 	private static final Logger LOG = LoggerFactory
@@ -263,9 +263,11 @@ public class JPAQueriesTest {
 		// Returns CustomerWithBankOfficeAddress
 		final String jpqlCustomersOffices = 
 				"SELECT NEW de.hawhamburg.se.CustomerWithBankOfficeAddress(c.name, a.street)"
-				+ "from Customer c, in(c.banks) b, in (b.offices) o join c.homeAddress a";
+				+ "from Customer c join bank.offices a"
+				+ "where c.homeAddress.postcode =  a.postcode";
+		
 		/*
-		 * SELECT ADDRESS.STREET, CUSTOMER.NAME FROM ADDRESS INNER JOIN
+		 * SELECT CUSTOMER.NAME, ADDRESS.STREET FROM ADDRESS INNER JOIN
 		 * BANK_OFFICE ON ADDRESS.ID = BANK_OFFICE.ADDRESS_ID INNER JOIN BANK ON
 		 * BANK.ID = BANK_OFFICE.BANK_ID INNER JOIN BANK_CUSTOMER ON BANK.ID =
 		 * BANK_CUSTOMER.BANK_ID INNER JOIN CUSTOMER ON CUSTOMER.ID =
