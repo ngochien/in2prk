@@ -99,8 +99,6 @@ public class JPAXMLTest {
 		em.getTransaction().begin();
 		em.persist(customer);
 		em.getTransaction().commit();
-//		final long id = insertCustomerInDB(SURNAME_1, NAME_1);
-//		customer.setId(id);
 		Assert.assertTrue(isCustomerOnDB(customer.getId(), SURNAME_1, NAME_1));
 	}
 
