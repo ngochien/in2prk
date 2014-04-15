@@ -24,9 +24,9 @@ public class JPAQueriesTest {
 
 	private static final String STREET_1 = "Murmelgasse";
 	// Die folgenden drei Konstanten müssen jeweils angepasst werden:
-	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
-	private static final String DB_USER = "hr";
-	private static final String DB_PASSWORD = "3113";
+	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/db_name";
+	private static final String DB_USER = "...";
+	private static final String DB_PASSWORD = "...";
 	// Ende
 
 	private static final Logger LOG = LoggerFactory
@@ -261,16 +261,11 @@ public class JPAQueriesTest {
 		// Select for each customer his name and the street names of bank
 		// offices of his bank in his home town
 		// Returns CustomerWithBankOfficeAddress
+		
+		// Jetzt läuft es. Aber verstehe ich nicht warum @_@
 		final String jpqlCustomersOffices = 
-				"SELECT NEW de.hawhamburg.se.CustomerWithBankOfficeAddress(c.name, a.street)"
-				+ "from Customer c, in(c.banks) b, in (b.offices) o join c.homeAddress a";
-		/*
-		 * SELECT ADDRESS.STREET, CUSTOMER.NAME FROM ADDRESS INNER JOIN
-		 * BANK_OFFICE ON ADDRESS.ID = BANK_OFFICE.ADDRESS_ID INNER JOIN BANK ON
-		 * BANK.ID = BANK_OFFICE.BANK_ID INNER JOIN BANK_CUSTOMER ON BANK.ID =
-		 * BANK_CUSTOMER.BANK_ID INNER JOIN CUSTOMER ON CUSTOMER.ID =
-		 * BANK_CUSTOMER.CUSTOMER_ID AND ADDRESS.ID = CUSTOMER.HOME_ADDRESS_ID
-		 */
+				"SELECT NEW de.hawhamburg.se.CustomerWithBankOfficeAddress(c.name, o.street)"
+				+ "from Customer c join c.banks b join b.offices o where c.homeAddress.postcode = o.postcode";
 
 		final TypedQuery<CustomerWithBankOfficeAddress> query = em.createQuery(
 				jpqlCustomersOffices, CustomerWithBankOfficeAddress.class);

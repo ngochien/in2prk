@@ -1,7 +1,5 @@
 package de.hawhamburg.se;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,19 +9,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 
 @Entity
-@org.hibernate.annotations.Entity(optimisticLock = org.hibernate.annotations.OptimisticLockType.ALL)
-public class Customer implements Serializable{
+public class Customer {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 0L;
 	private long id;
 	private String name;
 	private String surname;
-	private Long version = 0L;
-	
-	
+	private long version;
 
 	public Customer() {
 		// empty
@@ -46,14 +37,15 @@ public class Customer implements Serializable{
 	}
 
 	@Version
-	public Long getVersion() {
+	public long getVersion() {
 		return version;
 	}
-	
-	public void setVersion(Long version) {
+
+	// Ohne Setter läuft der Test nicht! Warum???
+	public void setVersion(final long version) {
 		this.version = version;
 	}
-	
+
 	@Column
 	public String getName() {
 		return name;

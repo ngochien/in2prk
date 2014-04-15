@@ -26,9 +26,9 @@ import org.slf4j.LoggerFactory;
 public class JPALockingTest {
 
 	// Die folgenden drei Konstanten müssen jeweils angepasst werden:
-	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
-	private static final String DB_USER = "hr";
-	private static final String DB_PASSWORD = "3113";
+	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/database_name";
+	private static final String DB_USER = "...";
+	private static final String DB_PASSWORD = "...";
 	// Ende
 
 	private static final Logger LOG = LoggerFactory
@@ -184,7 +184,7 @@ public class JPALockingTest {
 		parameters.add(surname);
 		parameters.add(name);
 		transactionManager.executeSQLInsert(
-				"insert into CUSTOMER (ID, SURNAME, NAME) values (?, ?, ?)",
+				"insert into CUSTOMER (ID, SURNAME, NAME, VERSION) values (?, ?, ?, 0)",
 				parameters);
 		transactionManager.commit();
 		return id;

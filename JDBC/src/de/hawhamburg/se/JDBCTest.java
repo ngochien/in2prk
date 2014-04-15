@@ -17,9 +17,9 @@ import junit.framework.Assert;
 public class JDBCTest {
 
 	// Die folgenden drei Konstanten müssen jeweils angepasst werden:
-	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
-	private static final String DB_USER = "hr";
-	private static final String DB_PASSWORD = "3113";
+	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/db_name";
+	private static final String DB_USER = "...";
+	private static final String DB_PASSWORD = "...";
 	// Ende
 
 	private static final String SURNAME_1 = "Felix";
