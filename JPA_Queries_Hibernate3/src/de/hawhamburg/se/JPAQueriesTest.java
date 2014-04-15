@@ -262,7 +262,7 @@ public class JPAQueriesTest {
 		// offices of his bank in his home town
 		// Returns CustomerWithBankOfficeAddress
 		
-		// Jetzt läuft es. Aber verstehe ich nicht warum @_@
+		// Jetzt läuft es. Aber ich verstehe nicht warum @_@
 		final String jpqlCustomersOffices =
 				"SELECT NEW de.hawhamburg.se.CustomerWithBankOfficeAddress(c.name, o.street)"
 				+ "from Customer c join c.banks b join b.offices o where c.homeAddress.postcode = o.postcode";
