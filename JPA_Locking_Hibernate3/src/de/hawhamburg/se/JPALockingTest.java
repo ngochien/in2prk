@@ -26,9 +26,9 @@ import org.slf4j.LoggerFactory;
 public class JPALockingTest {
 
 	// Die folgenden drei Konstanten müssen jeweils angepasst werden:
-	private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/database_name";
-	private static final String DB_USER = "...";
-	private static final String DB_PASSWORD = "...";
+	private static final String DB_URL = "jdbc:oracle:thin:@//oracle:1521/inf09";
+	private static final String DB_USER = "abl400";
+	private static final String DB_PASSWORD = "Nh31011991";
 	// Ende
 
 	private static final Logger LOG = LoggerFactory

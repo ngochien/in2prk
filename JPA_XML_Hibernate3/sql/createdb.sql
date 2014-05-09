@@ -2,7 +2,7 @@ drop sequence customerseq;
 
 drop table customer;
 
-create sequence customerseq;
+create sequence customerseq CASCADE CONSTRAINT;
 
 create table customer (
 	id number(32) primary key,

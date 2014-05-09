@@ -3,10 +3,10 @@ drop sequence addressseq;
 drop sequence creditcardseq;
 drop sequence bankseq;
 
-drop table creditcard;
-drop table customer;
-drop table address;
-drop table bank;
+drop table creditcard CASCADE CONSTRAINTS;
+drop table customer CASCADE CONSTRAINTS;
+drop table address CASCADE CONSTRAINTS;
+drop table bank CASCADE CONSTRAINTS;
 
 create table address (
 	id number(32) primary key,
