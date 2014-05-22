@@ -58,6 +58,7 @@ public class Client implements MessageListener {
 		// TODO start fill in here
 		Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
 		session.createConsumer(destination).setMessageListener(this);
+//		closeSession(session);	// never close session here!!!
 		// end of fill in
 	}
 
@@ -74,13 +75,16 @@ public class Client implements MessageListener {
 		// TODO start fill in here
 		Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
 		Destination replyTo = session.createQueue(replyMsgQueueName);
+		
 		Message txtMsg = session.createTextMessage(txtToSend);
 		txtMsg.setJMSCorrelationID(correlationId);
 		txtMsg.setJMSReplyTo(replyTo);
-		txtMsg.setJMSDeliveryMode(DeliveryMode.NON_PERSISTENT);
-		txtMsg.setJMSExpiration(1000);
+		txtMsg.setJMSDeliveryMode(DeliveryMode.NON_PERSISTENT);	// should do this
+		txtMsg.setJMSExpiration(1000);	// see lecture notes. no idea why I'm doing this
+		
 		session.createProducer(session.createQueue(msgQueueName)).send(txtMsg);
 		activateMessageListenerOnQueue(replyTo);
+		closeSession(session);
 		// end of fill in
 
 		return correlationId;
@@ -99,13 +103,16 @@ public class Client implements MessageListener {
 		// TODO start fill in here
 		Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
 		Destination replyTo = session.createTemporaryQueue();
+		
 		Message txtMsg = session.createTextMessage(txtToSend);
 		txtMsg.setJMSCorrelationID(correlationId);
 		txtMsg.setJMSReplyTo(replyTo);
 		txtMsg.setJMSDeliveryMode(DeliveryMode.NON_PERSISTENT);
 		txtMsg.setJMSExpiration(1000);
+		
 		session.createProducer(session.createQueue(msgQueueName)).send(txtMsg);
 		activateMessageListenerOnQueue(replyTo);
+		closeSession(session);
 		// end of fill in
 
 		return correlationId;

@@ -45,9 +45,6 @@ public class Component {
 
 		// TODO fill in here
 		Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
-//		Destination queue = session.createQueue(msgQueueName);
-//		MessageProducer producer = session.createProducer(queue);
-//		producer.send(session.createTextMessage(txt));
 		session.createProducer(session.createQueue(msgQueueName))
 				.send(session.createTextMessage(txt));
 		closeSession(session);
@@ -58,14 +55,12 @@ public class Component {
 		LOG.debug(name + ": Receiving message on queue " + msgQueueName);
 
 		Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
-//		Destination queue = session.createQueue(msgQueueName);
-//		MessageConsumer consumer = session.createConsumer(queue);
 		// fill this variable with the message received
 		final Message message = session.createConsumer(session.createQueue(msgQueueName))
-											.receive();
+										.receive();
 
 		// TODO start fill in here
-		closeSession(session);
+		closeSession(session);	// OK, because of synchronous messaging
 		// end of fill in
 
 		final String text = extractTextFromMessage(message);

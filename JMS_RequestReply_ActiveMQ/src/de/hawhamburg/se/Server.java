@@ -47,8 +47,9 @@ public class Server implements MessageListener {
 		LOG.debug(name + ": Starting server listening on queue " + msgQueueName);
 
 		// TODO fill in here
-		Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
-		session.createConsumer(session.createQueue(msgQueueName)).setMessageListener(this);
+		session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
+		session.createConsumer(session.createQueue(msgQueueName))
+				.setMessageListener(this);
 		// end fill in
 	}
 
@@ -86,7 +87,7 @@ public class Server implements MessageListener {
 			final String responseTxt = "Response to: " + txt;
 
 			// TODO fill in here
-			Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
+			session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
 			Message responseMsg = session.createTextMessage(responseTxt);
 			responseMsg.setJMSCorrelationID(correlationID);
 			session.createProducer(replyTo).send(responseMsg);

@@ -71,7 +71,7 @@ public class Component implements MessageListener {
 		Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
 		session.createConsumer(session.createTopic(msgTopicName))
 				.setMessageListener(this);
-//		closeSession(session);	// don't close session here!!?
+//		closeSession(session);	// don't close session here or messages can be lost.
 		// end of fill in
 	}
 
