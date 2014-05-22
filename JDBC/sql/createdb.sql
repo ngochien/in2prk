@@ -1,4 +1,4 @@
-drop table customer;
+drop table customer purge;
 create table customer (
 	id number(32) primary key,
 	name varchar2(50),
